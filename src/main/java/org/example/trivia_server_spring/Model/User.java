@@ -2,6 +2,8 @@ package org.example.trivia_server_spring.Model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "USER_ACCOUNT")
 public class User {
@@ -12,6 +14,18 @@ public class User {
     private String username;
 
     int num_of_wins;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return num_of_wins == user.num_of_wins && Objects.equals(id, user.id) && Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, num_of_wins);
+    }
 
     public void setId(Long id) {
         this.id = id;
