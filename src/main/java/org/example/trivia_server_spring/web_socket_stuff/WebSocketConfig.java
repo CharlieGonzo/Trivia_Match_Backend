@@ -1,4 +1,4 @@
-package org.example.trivia_server_spring;
+package org.example.trivia_server_spring.web_socket_stuff;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
