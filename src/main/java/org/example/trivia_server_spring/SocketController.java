@@ -16,7 +16,7 @@ public class SocketController {
         this.template = template;
     }
 
-    //test unique rooms
+    // test unique rooms
     @MessageMapping("{id}")
     public void test(@DestinationVariable String id){
         System.out.println("this method worked");
