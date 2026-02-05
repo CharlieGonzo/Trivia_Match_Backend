@@ -13,6 +13,8 @@ public class User {
 
     private String username;
 
+    private String password;
+
     int num_of_wins;
 
     @Override
@@ -49,5 +51,13 @@ public class User {
 
     public void setNum_of_wins(int num_of_wins) {
         this.num_of_wins = num_of_wins;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
