@@ -36,13 +36,13 @@ public class DatabaseController {
         return ResponseEntity.status(status).build();
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody CreateUserForm form) throws NoSuchAlgorithmException {
         String username = form.getUsername();
         String password = form.getPassword();
         Optional<User> user = userService.findByUsername(username);
         if(user.isPresent()){
-            if(!HashHelper.hashPassword(password).equals(user.get().getPassword()))
+            if(!password.equals(user.get().getPassword()))
                 return ResponseEntity.status(401).build(); // invalid credentials
             UserDTO userDTO = new UserDTO();
             userDTO.setUsername(user.get().getUsername());
@@ -53,7 +53,7 @@ public class DatabaseController {
         return ResponseEntity.status(401).build(); // invalid credentials
     }
 
-    @GetMapping("/randomQuestion")
+    @PostMapping("/randomQuestion")
     public ResponseEntity<Question> getRandomQuestion(){
         Optional<Question> question = questionService.getRandomQuestion();
         return question.map(value -> ResponseEntity.status(200).body(value)).orElseGet(() -> ResponseEntity.status(500).build());
@@ -64,10 +64,10 @@ public class DatabaseController {
         Optional<User> user = userService.findById(userDTO.getId());
         if(user.isPresent()){
             if(!userDTO.getUsername().equals(user.get().getUsername())){
-                return ResponseEntity.status(401).build();
+                return ResponseEntity.status(500).build();
             }
             userService.updateUser(user.get());
-            return ResponseEntity.status(200).build();
+            return ResponseEntity.status(204).build();
         }
         return ResponseEntity.status(500).build();
     }

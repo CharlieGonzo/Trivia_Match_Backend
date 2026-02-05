@@ -21,4 +21,6 @@ public class SocketController {
         System.out.println("this method worked");
         template.convertAndSend("/topic/" + id,"hello");
     }
+
+
 }
